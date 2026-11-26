@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100b25">
+  <title>ReelMagic AI - Creative Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#" onclick="showPage('home')">
+    <span class="brand-icon">✦</span> ReelMagic <span class="ai">AI</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="mainNav">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('reel')">Reel Replace</button>
+    <button onclick="showPage('photo')">Photo AI</button>
+    <button onclick="showPage('video')">Video AI</button>
+    <button onclick="showPage('music')">Music</button>
+    <button onclick="showPage('pricing')">Pricing</button>
+    <button onclick="showPage('settings')">Settings</button>
+  </nav>
+  <div class="top-actions">
+    <span class="credit-pill">✦ <b id="creditCount">50</b> credits</span>
+    <button class="small-btn" onclick="showPage('login')">Login</button>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="page active">
+    <div class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">✦ YOUR AI CREATIVE STUDIO</span>
+        <h1>Create something<br><span>magical.</span></h1>
+        <p>Turn your photos, videos and ideas into creative projects with ReelMagic AI.</p>
+        <div class="hero-buttons">
+          <button class="primary-btn" onclick="showPage('reel')">Start Creating ↗</button>
+          <button class="outline-btn" onclick="showPage('pricing')">Explore Plans</button>
+        </div>
+        <p class="hero-note">✦ Get 50 free demo credits every day</p>
+      </div>
+      <div class="hero-art">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="art-card">
+          <span>✦ AI CREATIVE STUDIO</span>
+          <div class="art-symbol">✧</div>
+          <h3>Your imagination,<br>our canvas.</h3>
+          <small>PHOTO • VIDEO • MUSIC</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <span class="eyebrow">EXPLORE TOOLS</span>
+      <h2>What would you like to create?</h2>
+      <p>Choose a tool and start your creative journey.</p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card featured" onclick="showPage('reel')">
+        <div class="feature-icon">🎬</div>
+        <span class="tag">FEATURED TOOL</span>
+        <h3>Reel Photo Replace</h3>
+        <p>Upload a video and your photos to prepare a reel replacement project.</p>
+        <span class="card-link">Open tool ↗</span>
+      </article>
+      <article class="feature-card" onclick="showPage('photo')">
+        <div class="feature-icon">🖼️</div>
+        <h3>Photo AI</h3>
+        <p>Upload a photo and describe the edit you want.</p>
+        <span class="card-link">Open tool ↗</span>
+      </article>
+      <article class="feature-card" onclick="showPage('video')">
+        <div class="feature-icon">🎥</div>
+        <h3>Video AI</h3>
+        <p>Explore your video ideas with prompts and uploads.</p>
+        <span class="card-link">Open tool ↗</span>
+      </article>
+      <article class="feature-card" onclick="showPage('music')">
+        <div class="feature-icon">🎵</div>
+        <h3>Music Studio</h3>
+        <p>Write lyrics and plan your music projects.</p>
+        <span class="card-link">Open tool ↗</span>
+      </article>
+      <article class="feature-card" onclick="showPage('projects')">
+        <div class="feature-icon">📁</div>
+        <h3>My Projects</h3>
+        <p>View your saved demo project list.</p>
+        <span class="card-link">Open projects ↗</span>
+      </article>
+      <article class="feature-card" onclick="showPage('gallery')">
+        <div class="feature-icon">✨</div>
+        <h3>Gallery</h3>
+        <p>See the files you selected in this session.</p>
+        <span class="card-link">Open gallery ↗</span>
+      </article>
+    </div>
+
+    <div class="daily-banner">
+      <div><span class="eyebrow">A LITTLE CREATIVE BOOST</span><h2>50 free credits every day</h2><p>Try the demo tools and explore your ideas.</p></div>
+      <div class="big-credit">✦ 50</div>
+    </div>
+  </section>
+
+  <!-- REEL TOOL -->
+  <section id="reel" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">FEATURED AI TOOL</span>
+      <h1>Reel Photo <span>Replace</span></h1>
+      <p>Upload your video and photos to prepare a replacement project.</p>
+    </div>
+    <div class="editor-layout">
+      <div class="panel">
+        <h3>01. Add your reel video</h3>
+        <label class="upload-box">
+          <input type="file" id="reelVideo" accept="video/*" onchange="previewFile(this,'reelPreview')">
+          <span class="upload-symbol">🎞️</span>
+          <b>Choose a video</b>
+          <small>MP4, WebM or MOV</small>
+        </label>
+        <video id="reelPreview" class="media-preview" controls hidden></video>
+        <label class="field-label" for="reelUrl">Or paste a public Reel link</label>
+        <input id="reelUrl" class="text-input" type="url" placeholder="https://www.instagram.com/reel/...">
+        <p class="hint">Instagram links may not be directly accessible. Uploading your own video is the reliable option.</p>
+      </div>
+      <div class="panel">
+        <h3>02. Add your photos</h3>
+        <label class="upload-box">
+          <input type="file" id="reelPhotos" accept="image/*" multiple onchange="previewImages(this,'reelPhotoPreview')">
+          <span class="upload-symbol">📸</span>
+          <b>Choose your photos</b>
+          <small>Select one or more images</small>
+        </label>
+        <div id="reelPhotoPreview" class="preview-grid"></div>
+      </div>
+    </div>
+    <div class="panel prompt-panel">
+      <h3>03. Describe your idea</h3>
+      <textarea id="reelPrompt" class="text-input" placeholder="Example: Replace the selected scenes with my uploaded photos..."></textarea>
+      <button class="primary-btn" onclick="createDemoProject('Reel Photo Replace','reelPrompt')">Prepare my project ✨</button>
+      <p class="hint">This prototype collects your files and prompt. Automatic AI scene detection and video replacement are not connected yet.</p>
+    </div>
+  </section>
+
+  <!-- PHOTO -->
+  <section id="photo" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">IMAGE CREATION</span>
+      <h1>Photo <span>AI</span></h1>
+      <p>Choose a photo and describe the changes you want.</p>
+    </div>
+    <div class="panel narrow">
+      <label class="upload-box">
+        <input type="file" id="photoFile" accept="image/*" onchange="previewFile(this,'photoPreview')">
+        <span class="upload-symbol">🖼️</span><b>Upload a photo</b><small>JPG, PNG or WebP</small>
+      </label>
+      <img id="photoPreview" class="media-preview" alt="Your photo preview" hidden>
+      <label class="field-label" for="photoPrompt">Your prompt</label>
+      <textarea id="photoPrompt" class="text-input" placeholder="Describe your photo edit..."></textarea>
+      <button class="primary-btn" onclick="createDemoProject('Photo AI','photoPrompt')">Prepare Photo Project ✨</button>
+      <p class="hint">AI image generation is not connected in this prototype.</p>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">VIDEO CREATION</span>
+      <h1>Video <span>AI</span></h1>
+      <p>Start with a photo, video or text idea.</p>
+    </div>
+    <div class="feature-grid three">
+      <div class="panel">
+        <h3>Photo to Video</h3>
+        <label class="upload-box compact-upload"><input type="file" id="videoPhoto" accept="image/*" onchange="previewFile(this,'videoPhotoPreview')"><span class="upload-symbol">📷</span><b>Upload photo</b></label>
+        <img id="videoPhotoPreview" class="media-preview" alt="Photo preview" hidden>
+      </div>
+      <div class="panel">
+        <h3>Video to Video</h3>
+        <label class="upload-box compact-upload"><input type="file" id="videoFile" accept="video/*" onchange="previewFile(this,'videoFilePreview')"><span class="upload-symbol">🎥</span><b>Upload video</b></label>
+        <video id="videoFilePreview" class="media-preview" controls hidden></video>
+      </div>
+      <div class="panel">
+        <h3>Text to Video</h3>
+        <div class="text-icon">✍️</div>
+        <p class="hint">Describe the video you imagine below.</p>
+      </div>
+    </div>
+    <div class="panel prompt-panel">
+      <label class="field-label" for="videoPrompt">Describe your video idea</label>
+      <textarea id="videoPrompt" class="text-input" placeholder="Example: A peaceful sunset over the ocean..."></textarea>
+      <button class="primary-btn" onclick="createDemoProject('Video AI','videoPrompt')">Prepare Video Project ✨</button>
+      <p class="hint">Video generation and editing AI are not connected yet.</p>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <section id="music" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">SOUND & LYRICS</span>
+      <h1>Music <span>Studio</span></h1>
+      <p>Start writing lyrics and planning your music ideas.</p>
+    </div>
+    <div class="panel narrow">
+      <label class="field-label" for="musicTitle">Project name</label>
+      <input id="musicTitle" class="text-input" placeholder="My new song">
+      <label class="field-label" for="lyrics">Write your lyrics or music idea</label>
+      <textarea id="lyrics" class="text-input tall" placeholder="Start writing your original lyrics here..."></textarea>
+      <button class="primary-btn" onclick="saveMusicProject()">Save Music Project ✨</button>
+      <p class="hint">Music generation and audio tools are not connected in this prototype.</p>
+    </div>
+  </section>
+
+  <!-- LOGIN -->
+  <section id="login" class="page">
+    <div class="auth-card">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <div class="auth-logo">✦</div>
+      <h1>Welcome <span>back</span></h1>
+      <p>Sign in to your demo account.</p>
+      <label class="field-label" for="loginEmail">Email</label>
+      <input class="text-input" id="loginEmail" type="email" placeholder="you@example.com">
+      <label class="field-label" for="loginPassword">Password</label>
+      <input class="text-input" id="loginPassword" type="password" placeholder="Enter password">
+      <button class="text-link right" onclick="showPage('forgot')">Forgot Password?</button>
+      <button class="primary-btn full" onclick="demoLogin()">Login</button>
+      <p class="auth-switch">New here? <button class="text-link" onclick="showPage('signup')">Create account</button></p>
+      <p class="hint">Demo only: this is not secure real authentication.</p>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section id="signup" class="page">
+    <div class="auth-card">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <div class="auth-logo">✦</div>
+      <h1>Create your <span>account</span></h1>
+      <p>Join the ReelMagic AI demo.</p>
+      <label class="field-label" for="signupName">Your name</label>
+      <input class="text-input" id="signupName" placeholder="Your name">
+      <label class="field-label" for="signupEmail">Email</label>
+      <input class="text-input" id="signupEmail" type="email" placeholder="you@example.com">
+      <label class="field-label" for="signupPassword">Password</label>
+      <input class="text-input" id="signupPassword" type="password" placeholder="Create a password">
+      <button class="primary-btn full" onclick="demoSignup()">Create Account</button>
+      <p class="auth-switch">Already registered? <button class="text-link" onclick="showPage('login')">Login</button></p>
+      <p class="hint">Demo account only. Do not use a real password here.</p>
+    </div>
+  </section>
+
+  <!-- FORGOT PASSWORD -->
+  <section id="forgot" class="page">
+    <div class="auth-card">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <div class="auth-logo">🔐</div>
+      <h1>Forgot <span>Password?</span></h1>
+      <p>Enter your email to preview the password reset process.</p>
+      <label class="field-label" for="forgotEmail">Email address</label>
+      <input class="text-input" id="forgotEmail" type="email" placeholder="you@example.com">
+      <button class="primary-btn full" onclick="demoForgot()">Continue</button>
+      <p class="hint">Real password reset needs secure email verification and a backend.</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">YOUR WORKSPACE</span><h1>My <span>Projects</span></h1>
+      <p>Your demo projects created in this browser.</p>
+    </div>
+    <div id="projectList" class="project-list"><p class="empty-state">No projects yet. Start creating something!</p></div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">YOUR MEDIA</span><h1>My <span>Gallery</span></h1>
+      <p>Preview files selected during this session.</p>
+    </div>
+    <div id="galleryList" class="gallery-grid"><p class="empty-state">Your selected media previews will appear here.</p></div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">SIMPLE PLANS</span><h1>Choose your <span>plan</span></h1>
+      <p>Demo pricing cards. No real payments are collected.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="price-card"><span class="tag">FREE</span><h2>Starter</h2><div class="price">₹0</div><p>50 demo credits daily</p><p>Basic project workspace</p><p>Upload previews</p><button class="outline-btn" onclick="showPage('home')">Current demo plan</button></article>
+      <article class="price-card popular"><span class="tag">PREMIUM CONCEPT</span><h2>Premium</h2><div class="price">Coming soon</div><p>Advanced creative tools</p><p>Premium effects concept</p><p>More project options</p><button class="primary-btn" onclick="demoPayment()">Preview Premium</button></article>
+      <article class="price-card"><span class="tag">CREDITS</span><h2>Credit Packs</h2><div class="price">Coming soon</div><p>Extra AI credits concept</p><p>Flexible packages</p><p>Usage history concept</p><button class="outline-btn" onclick="demoPayment()">Preview Credits</button></article>
+    </div>
+    <p class="hint center">Prices and payment checkout are not active. Real payments require a secure provider and adult-managed account.</p>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settings" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">PERSONALIZE YOUR SPACE</span><h1>Settings</h1>
+      <p>Manage your demo preferences.</p>
+    </div>
+    <div class="panel settings-panel">
+      <div class="setting-row"><div><b>Appearance</b><small>Switch between dark and light mode</small></div><button class="outline-btn" onclick="toggleTheme()">Toggle theme</button></div>
+      <div class="setting-row"><div><b>Language</b><small>Choose your preferred display language</small></div><select id="languageSelect" class="text-input setting-select"><option>English</option><option>Telugu</option><option>Hindi</option></select></div>
+      <div class="setting-row"><div><b>Daily credits</b><small>50 demo credits per browser day</small></div><span class="credit-pill">✦ 50 / day</span></div>
+      <div class="setting-row"><div><b>Account</b><small>Demo sign out</small></div><button class="outline-btn" onclick="demoLogout()">Logout</button></div>
+      <div class="setting-row"><div><b>Help & Support</b><small>Questions about the demo website</small></div><button class="outline-btn" onclick="showPage('help')">Open help</button></div>
+    </div>
+  </section>
+
+  <!-- HELP -->
+  <section id="help" class="page">
+    <div class="page-heading">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <span class="eyebrow">WE ARE HERE TO HELP</span><h1>Help & <span>Support</span></h1>
+      <p>Learn about this prototype.</p>
+    </div>
+    <div class="panel narrow">
+      <h3>Is AI generation active?</h3><p class="hint">Not yet. The current version supports interface navigation, local previews and demo project saving.</p>
+      <h3>Are payments active?</h3><p class="hint">No. Pricing and credit buttons are demonstrations only.</p>
+      <h3>Are my projects online?</h3><p class="hint">No. Demo project information is saved in this browser only.</p>
+      <button class="primary-btn" onclick="showPage('home')">Back to Home</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a class="brand" href="#" onclick="showPage('home')">✦ ReelMagic <span class="ai">AI</span></a>
+  <p>Imagine it. Create it. Make it magical.</p>
+  <div class="footer-links">
+    <button onclick="showPage('help')">Help</button>
+    <button onclick="showPage('pricing')">Pricing</button>
+    <button onclick="showPage('settings')">Settings</button>
+  </div>
+  <small>© 2026 ReelMagic AI · Prototype</small>
+</footer>
+
+<div id="toast" class="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
